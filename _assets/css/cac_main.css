@@ -1,0 +1,59 @@
+body {
+    background: #E3EAF5;
+}
+.b-test{
+    border: black solid 1px;
+}
+.spacer-H15{
+    min-height: 15px;
+}
+.spacer-H50{
+    min-height: 50px;
+}
+.spacer-H75{
+    min-height: 75px;
+}
+
+.hr-C1{
+    border-color: black;
+}
+.s-container{
+    border-radius: 5px;
+}
+.hidden_div {
+    display: none;
+}
+.error-msg{
+    color: red;
+}
+.theme-1{}
+.index-box{
+
+}
+.table-custom{
+    border: black solid 1px;
+}
+.table-row{
+    border: black solid 1px;
+}
+.table-col-r{
+    border-right: #000000 solid 1px;
+}
+.table-col-l{
+    border-left: #dcdcdc solid 1px;
+}
+.table-alt-0{
+    background-color: #bfbfbf;
+}
+.table-alt-1{
+    background-color: #d4d4d4;
+}
+.table-head{
+    background-color: #8e8e8e;
+    border-bottom: black solid 2px;
+    border-top: black solid 2px;
+}
+.main-bg-c{
+    background-color: #f5f5dc;
+}
+
