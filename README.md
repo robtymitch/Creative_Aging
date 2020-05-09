@@ -9,4 +9,4 @@ Project:
 Instructions for setting up this project:
 
     To configure the database access for phpmyadmin, change the value of DB_SETTINGS inside the DataLoader.php
-    file to whatever your local server is. File path: main/_classes/DataLoader.php
+    file to whatever your local server is. File path: main/_classes/DataLoader.php 
