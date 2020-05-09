@@ -13,7 +13,8 @@ Non-Profit:
 Project:
 
    This project will serve as a tool to track attendance numbers for arts events hosted for seniors in the Cincinnati area. Instead of their current spreadsheet system, Creative Aging will be able to enter data into the database we've built and generate reports from the data based on different parameters. Ease of use and flexibility were two main focuses of our design philosophy in the hopes that we can make managing data easier for our users. We have achieved the base fuctionality of this tool, and plan to continue working with Creative Aging to implement several features in the future, including data entry via file upload and more robust ways to handle the stored data.
-<br>
+
+
 Instructions for setting up this project:
 
     To configure the database access for phpmyadmin, change the value of DB_SETTINGS inside the DataLoader.php
