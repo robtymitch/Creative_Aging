@@ -1,5 +1,5 @@
 # Creative_Aging
-Members: Robert 'Tyler' Mitchell, Randy 'RJ' Clark, Leo 'Alex' Christen, Levi 'Goes my firstname' Schanding
+Members: Robert 'Tyler' Mitchell, Randy 'RJ' Clark, Leo 'Alex' Christen, Levi 'Goes by firstname' Schanding
 
 Non-Profit:
 
