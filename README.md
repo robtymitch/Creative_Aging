@@ -2,8 +2,11 @@
 Members: Robert 'Tyler' Mitchell, Randy 'RJ' Clark, Leo 'Alex' Christen, Levi 'Goes by firstname' Schanding
 
 Tyler: SQL Expert, Quality Control, created the SQL logic for creating the report
+
 Alex: Created the data model/database, styled all pages, wrote queries
+
 RJ: Non-profit liason, project manager, created forms and PHP logic for new data and data management
+
 Levi: Built DataLoader, implemented PHP logic for creating the report
 
 Non-Profit:
