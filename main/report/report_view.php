@@ -4,8 +4,10 @@ require_once("../../_libs/Template.php");
 session_start();
 Template::showHeader("View Report", "../../");
 $report = $_SESSION["report"];
+$total_attendees = $_SESSION["report-attendee-total"];
 $_SESSION = [];
 session_destroy();
+
 ?>
     <body class="container main-bg-c">
     <?php
@@ -29,6 +31,21 @@ session_destroy();
         ?>
         <table class="table table-custom">
             <tr class="table-head">
+                <th class="table-col-r">Total Attendees</th>
+                <th class="table-col-r">Total Children</th>
+                <th class="table-col-r">Total Adults</th>
+                <th class="table-col-r">Total Seniors</th>
+            </tr>
+            <tr class="table-alt-0 table-row">
+                <th class="table-col-r"><?= $total_attendees[0]["temp_total"] ?></th>
+                <th class="table-col-r"><?= $total_attendees[0]["total_children"] ?></th>
+                <th class="table-col-r"><?= $total_attendees[0]["total_adults"] ?></th>
+                <th class="table-col-r"><?= $total_attendees[0]["total_seniors"] ?></th>
+            </tr>
+        </table>
+        <br>
+        <table class="table table-custom">
+            <tr class="table-head">
                 <th class="table-col-r">Program</th>
                 <th class="table-col-r">Topic</th>
                 <th class="table-col-r">Start Date</th>
@@ -39,7 +56,6 @@ session_destroy();
                 <th class="table-col-r">Adult Attendees</th>
                 <th class="table-col-r">Senior Attendees</th>
                 <th class="table-col-r">Funding Source</th>
-                <th>Funding Amount</th>
             </tr>
             <?php
             for ($i = 0; $i < count($report); $i++) {
@@ -63,15 +79,16 @@ session_destroy();
                 <th class="table-col-r"><?= $report[$i]["num_adults"] ?></th>
                 <th class="table-col-r"><?= $report[$i]["num_seniors"] ?></th>
                 <th class="table-col-r"><?= $report[$i]["funding_name"] ?></th>
-                <th><?= $report[$i]["funding_amount"] ?></th>
                 </tr>
                 <?php
+
             }
             ?>
         </table>
+        <br>
+
         <?php
-    }
-    else{
+    } else {
         ?>
         <h3>No.</h3>
         <?php

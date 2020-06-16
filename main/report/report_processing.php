@@ -10,7 +10,17 @@ $query_string = "SELECT program_name, program_topic,
 date_start, date_end, facility_name,
 num_children, num_adults, num_seniors,
 (num_children + num_adults + num_seniors) as total_attendees,
-funding_name, funding_amount
+funding_name
+FROM programs as p
+    INNER JOIN events as e ON e.program_id = p.program_id
+    INNER JOIN events_facilities as ef ON ef.event_id = e.event_id
+    INNER JOIN facilities as f ON f.facility_id = ef.facility_id
+    INNER JOIN funding as fun ON fun.funding_id = ef.funding_id
+    ";
+$query_total_attendees = "SELECT SUM(num_children + num_adults + num_seniors) as temp_total,
+SUM(num_children) as total_children,
+SUM(num_adults) as total_adults,
+SUM(num_seniors) as total_seniors
 FROM programs as p
     INNER JOIN events as e ON e.program_id = p.program_id
     INNER JOIN events_facilities as ef ON ef.event_id = e.event_id
@@ -43,6 +53,7 @@ if ($_POST["facilityOpt"] != "allFacilities") {
 
 if (count($conditions) > 0) {
     $query_string = $query_string . 'WHERE ' . implode(' AND ', $conditions);
+    $query_total_attendees = $query_total_attendees . 'WHERE ' . implode(' AND ', $conditions);
 //    echo($query_string);
 //    die();
 }
@@ -56,5 +67,17 @@ while ($q = $query->fetch()) {
     array_push($arr, $q);
 
 }
+
+$attendees_query = $db->prepare($query_total_attendees);
+$attendees_query->execute();
+//
+$attendees_arr = [];
+//
+while ($q = $attendees_query->fetch()) {
+//
+    array_push($attendees_arr, $q);
+//
+}
 $_SESSION['report'] = $arr;
+$_SESSION['report-attendee-total'] = $attendees_arr;
 header("Location: report_view.php");
