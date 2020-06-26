@@ -1,5 +1,23 @@
+
+
+
 body {
     background: #E3EAF5;
+}
+#pending-container{
+    border: 2px solid gray;
+
+    border-radius: 5px;
+    overflow: hidden;
+}
+#pending-container div{
+    background-color: white;
+}
+#m-a-ch,  #m-a-ad, #m-a-se, #pending-check, input{
+    float:right;
+}
+#pending-check label{
+    float: right;
 }
 .b-test{
     border: black solid 1px;
@@ -57,3 +75,15 @@ body {
     background-color: #f5f5dc;
 }
 
+.scroll-box{
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    max-height: 800px;
+}
+.pending-entry{
+
+}
+.border-buffer{
+    margin: 70px;
+}

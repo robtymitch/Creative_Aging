@@ -332,6 +332,7 @@ namespace DataLoader {
         }
     }
     class CACEventFacility extends DataHandler{
+        private $ef_id;
         private $event_id;
         private $facility_id;
         private $funding_id;
