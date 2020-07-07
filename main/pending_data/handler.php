@@ -8,6 +8,10 @@ define("NOT_PENDING", 0);
 define("IS_PENDING", 1);
 
 
+
+
+
+
 $db = \DataLoader\DataHandler::connectToDB();
 
 if (isset($_REQUEST["token"])) {
@@ -66,7 +70,7 @@ if (isset($_REQUEST["token"])) {
         case "commit":{
             $pending_query = "UPDATE events_facilities SET num_children=?, num_adults=?, num_seniors=?, pending=? WHERE ef_id=?";
             $query = $db->prepare($pending_query);
-            $query->execute([$_REQUEST['attChildren'], $_REQUEST['attAdults'], $_REQUEST['attSeniors'], (($_REQUEST['pendingCheck'] == true) ? NOT_PENDING : IS_PENDING), $_REQUEST['id']]);
+            $query->execute([$_REQUEST['attChildren'], $_REQUEST['attAdults'], $_REQUEST['attSeniors'], (($_REQUEST['pendingCheck'] == "true") ? NOT_PENDING : IS_PENDING), $_REQUEST['id']]);
         }
         default:
     }
