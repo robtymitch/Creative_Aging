@@ -126,7 +126,11 @@ Template::genNavBar(
         <label for="eventTotalChild">Total Child Attendees: </label>
         <input type="number" id="eventTotalChild" name="eventTotalChild" min="0"><br>
         <label for="eventNotes">Notes: </label><input type="text" name="eventNotes" id="eventNotes"><br>
+        <label for="eventPending">Pending?: </label>
+        <input id="eventPending" type="checkbox" name="eventPending">
+        <br>
         <input class="btn btn-primary" name="submission" type="submit" value="Submit">
+
     </form>
 <?php
 Template::addScript('controller_cd.js');
