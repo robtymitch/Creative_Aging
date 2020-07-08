@@ -27,7 +27,7 @@ Template::showHeader("Index", "../");
         <br class="">
         <a class="btn btn-primary col" href="manage_data/manage-data-select.php">Manage Data</a><br />
         <br class="">
-        <a class="btn btn-primary col" href="pending_data/pending.php">Manage Pending Data</a><br />
+        <a class="btn btn-primary col" href="pending_data/pending.php">Pending Data</a><br />
         <br class="">
         <a class="btn btn-secondary col" href="report/report_generate.php">Generate Report</a><br />
     </div>

@@ -87,3 +87,6 @@ body {
 .border-buffer{
     margin: 70px;
 }
+.selection-warning{
+    box-shadow: 0 0 3px rgba(255, 0, 12, 0.75), 0 0 3px rgba(255, 5, 0, 0.59);
+}

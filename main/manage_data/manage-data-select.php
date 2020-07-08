@@ -56,7 +56,7 @@ Template::showHeader("Manage Data", "../../");
                     ORDER BY date_start, facility_id DESC");
                     while ($event = $event_query->fetch()) {
                         ?>
-                        <option value="<?php echo $event['program_id'] . '-' . $event['facility_id'] ?>"><?php echo $event['program_name'] . ' - ' . $event['facility_name'] . ' - ' . $event['date_start'] ?></option>
+                        <option value="<?php echo $event['program_id'] . '-' . $event['facility_id'] . '-' . $event['event_id'] ?>"><?php echo $event['program_name'] . ' - ' . $event['facility_name'] . ' - ' . $event['date_start'] ?></option>
                         <?php
                     }
                     ?>

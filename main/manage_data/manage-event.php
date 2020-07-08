@@ -8,16 +8,27 @@ if (isset($_POST['selectEvent'])) {
         header("Location: manage-data-select.php?e=".$err);
     }
 
-    if ($_POST['selectEvent'] == 'getNew') $id = $_POST['program_id'] . '-' . $_POST['facility_id'];
+    if ($_POST['selectEvent'] == 'getNew'){
+        $id = $_POST['program_id'] . '-' . $_POST['facility_id'];
+    }
     else $id = $_POST['selectEvent'];
     $pieces = explode("-", $id);
     $programID = $pieces[0];
     $facilityID = $pieces[1];
+    $eventID = $pieces[2];
 }
 else{
     header("Location: manage-data-select.php");
 }
 $db = \DataLoader\DataHandler::connectToDB();
+
+if(isset($_POST['delete'])){
+    if($_POST['delete'] == 'Delete'){
+        unset($_POST['delete']);
+        $db->query('DELETE FROM events WHERE event_id=' . $eventID);
+        header("Location: manage-data-select.php");
+    }
+}
 if ($_POST['mode'] == 'view' || $_POST['mode'] == 'edit') {
     $query = $db->prepare('SELECT e.event_id, e.event_type, e.program_id, p.program_name, ef.facility_id, f.facility_name, fun.funding_name, fun.funding_id, e.date_start, e.date_end, ef.num_children, ef.num_adults, ef.num_seniors, (ef.num_children + ef.num_adults + ef.num_seniors) as total_attendees
                         FROM programs as p
@@ -73,6 +84,7 @@ Template::genNavBar(
 <h1>Review Event Data</h1>
 <?php
 if ($_POST['mode'] == 'view') {
+    //TODO: Clean up
     echo '<div class="card" style="width: 80%;">
             <div class="card-body">
                 <h5>Program Name</h5>
@@ -111,7 +123,23 @@ if ($_POST['mode'] == 'view') {
                     <input name="num_adults" id="num_adults" value="' . $data['num_adults'] . '" hidden>
                     <input name="num_seniors" id="num_seniors" value="' . $data['num_seniors'] . '" hidden>
                     <input name="total_attendees" id="total_attendees" value="' . $data['total_attendees'] . '" hidden>
-                    <button type="submit" formmethod="post" class="btn btn-light">Edit</button>
+                    <button type="submit" formmethod="post" class="btn btn-warning">Edit</button>
+                    <button type="button" class="btn btn-danger" onclick="eventDelete()">Delete</button>
+                    <!-- confirmation modal -->
+                    <div id="confirm-modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="finalize-modal" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Confirmation</h5>
+                                </div>
+                                <div>Are you sure?</div>
+                                <div class="modal-footer">
+                                    <input name="delete" type="submit" class="btn btn-danger" value="Delete">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
               </div>
             </div>';
@@ -201,15 +229,9 @@ if ($_POST['mode'] == 'update') {
 }
 ?>
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+<script src="../../_assets/js/jquery-3.5.1.js"></script>
+<script src="../../_assets/js/bootstrap.min.js"></script>
+<script src="controller.js"></script>
 </body>
 <?php
 Template::showFooter();

@@ -126,13 +126,30 @@ Template::genNavBar(
         <label for="eventTotalChild">Total Child Attendees: </label>
         <input type="number" id="eventTotalChild" name="eventTotalChild" min="0"><br>
         <label for="eventNotes">Notes: </label><input type="text" name="eventNotes" id="eventNotes"><br>
-        <label for="eventPending">Pending?: </label>
-        <input id="eventPending" type="checkbox" name="eventPending">
         <br>
-        <input class="btn btn-primary" name="submission" type="submit" value="Submit">
-
+        <div>
+            <button type="button" class="btn btn-primary" onclick="confirmEntry()">Submit</button>
+        </div>
+        <!-- Confirmation Modal -->
+        <div id="confirm-modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="finalize-modal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirmation</h5>
+                    </div>
+                    <div id="check-message">Are you sure?</div>
+                    <div class="modal-footer">
+                        <input id="submit-entry" class="btn btn-primary" name="submission" type="submit" value="Submit">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="resetErrors()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 <?php
+
+Template::addScript('../../_assets/js/jquery-3.5.1.js');
+Template::addScript('../../_assets/js/bootstrap.js');
 Template::addScript('controller_cd.js');
 ?>
 </body>
