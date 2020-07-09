@@ -11,7 +11,11 @@ if(isset($_POST["selectProgram"])){
 else{
     header("Location: manage-data-select.php");
 }
-
+?>
+    <script>
+        let mode = "unset";
+    </script>
+<?php
 $id = $_POST['selectProgram'];
 $pdo = \DataLoader\DataHandler::connectToDB();
 $query = $pdo->prepare('SELECT program_name, program_topic FROM programs WHERE program_id = ?');
@@ -27,7 +31,7 @@ function isSelected($value, $option)
     if ($value == $option) return 'selected="selected"';
     else return '';
 }
-Template::showHeader("Manage Programs");
+Template::showHeader("Manage Programs", "../../");
 ?>
 <body>
 <?php
@@ -46,6 +50,11 @@ Template::genNavBar(
 <h1>Review Program Data</h1>
 <?php
 if ($_POST['mode'] == 'view') {
+    ?>
+    <script>
+        mode = "view";
+    </script>
+    <?php
     echo '<div class="card" style="width: 80%;">
             <div class="card-body">
                 <h5>Title</h5>
@@ -63,9 +72,14 @@ if ($_POST['mode'] == 'view') {
             </div>';
 }
 if ($_POST['mode'] == 'edit') {
+    ?>
+    <script>
+        mode = "edit";
+    </script>
+    <?php
     echo '<div class="card" style="width: 80%;">
             <div class="card-body">
-                <form action="manage-program.php" method="POST">
+                <form id="edit-form" action="manage-program.php" method="POST">
                     <h5>Title</h5>
                     <input type="text" name="program_name" id="program_name" value="' . $data['program_name'] . '"></br></br>
                     <h5>Program Topic</h5>
@@ -76,9 +90,10 @@ if ($_POST['mode'] == 'edit') {
                         <option value="drama"' . isSelected("drama", $data['program_topic']) . '>Drama</option>
                         <option value="history-culture"' . isSelected("history-culture", $data['program_topic']) . '>History/Culture</option>
                     </select></br></br>
-                    <input name="mode" id="mode" value="update" hidden> 
+                    <input name="mode" id="mode" value="" type="hidden"> 
                     <input name="selectProgram" id="selectProgram" value="' . $id . '" hidden>
-                    <button type="submit" formmethod="post" class="btn btn-light">Submit</button>
+                    <button type="button"  class="btn btn-primary" onclick="editUpdate()">Submit</button>
+                    <button type="button"  class="btn btn-secondary" onclick="editCancel()">Cancel</button>
                 </form>
               </div>
             </div>';
@@ -101,15 +116,9 @@ if ($_POST['mode'] == 'update') {
 }
 ?>
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+<script src="../../_assets/js/jquery-3.5.1.js"></script>
+<script src="../../_assets/js/bootstrap.min.js"></script>
+<script src="controller.js"></script>
 </body>
 <?php
 Template::showFooter();

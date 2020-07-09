@@ -1,7 +1,11 @@
 <?php
 require_once('../_classes/DataLoader.php');
 require_once('../../_libs/Template.php');
-
+?>
+<script>
+    let mode = "unset";
+</script>
+<?php
 if (isset($_POST['selectEvent'])) {
     if($_POST["selectEvent"] == "null"){
         $err = "No event has been selected!";
@@ -9,7 +13,7 @@ if (isset($_POST['selectEvent'])) {
     }
 
     if ($_POST['selectEvent'] == 'getNew'){
-        $id = $_POST['program_id'] . '-' . $_POST['facility_id'];
+        $id = $_POST['program_id'] . '-' . $_POST['facility_id'] . '-' . $_POST['event_id'];
     }
     else $id = $_POST['selectEvent'];
     $pieces = explode("-", $id);
@@ -30,6 +34,18 @@ if(isset($_POST['delete'])){
     }
 }
 if ($_POST['mode'] == 'view' || $_POST['mode'] == 'edit') {
+    if($_POST['mode'] == 'edit'){
+        ?>
+        <script>
+            mode = "edit";
+        </script>
+        <?php
+    } else {
+        ?><script>
+            mode = "view";
+        </script>
+        <?php
+    }
     $query = $db->prepare('SELECT e.event_id, e.event_type, e.program_id, p.program_name, ef.facility_id, f.facility_name, fun.funding_name, fun.funding_id, e.date_start, e.date_end, ef.num_children, ef.num_adults, ef.num_seniors, (ef.num_children + ef.num_adults + ef.num_seniors) as total_attendees
                         FROM programs as p
                         INNER JOIN events as e ON e.program_id = p.program_id
@@ -147,7 +163,7 @@ if ($_POST['mode'] == 'view') {
 if ($_POST['mode'] == 'edit') {
     echo '<div class="card" style="width: 80%;">
             <div class="card-body">
-                <form action="manage-event.php" method="POST">
+                <form id="edit-form" action="manage-event.php" method="POST">
                     <h5>Event Type</h5>
                     <select name="event_type" id="event_type">
                         <option value="scp"' . isSelected("scp", $data['event_type']) . '>Senior Community Program</option>
@@ -185,11 +201,14 @@ if ($_POST['mode'] == 'edit') {
                     <input type="number" name="num_adults" id="num_adults" value="' . $data['num_adults'] . '" min=0></br></br>
                     <h5>Total Senior Attendees</h5>
                     <input type="number" name="num_seniors" id="num_seniors" value="' . $data['num_seniors'] . '" min=0></br></br>
-                    <input name="mode" id="mode" value="update" hidden>';
+                    <input name="mode" id="mode" value="" type="hidden">';
     $id = 'getNew';
     echo '<input name="selectEvent" id="selectEvent" value="' . $id . '" hidden>
                     <input name="event_id" id="event_id" value="' . $data['event_id'] . '" hidden>
-                    </br><button type="submit" formmethod="post" class="btn btn-light">Submit</button>
+                    </br>
+                    <button type="button"  class="btn btn-primary" onclick="editUpdate()">Submit</button>
+                    <button type="button"  class="btn btn-secondary" onclick="editCancel()">Cancel</button>
+                    
                 </form>
               </div>
             </div>';

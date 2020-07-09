@@ -10,6 +10,11 @@ if(isset($_POST["selectFunding"])){
 else{
     header("Location: manage-data-select.php");
 }
+?>
+    <script>
+        let mode = "unset";
+    </script>
+<?php
 $id = $_POST['selectFunding'];
 $pdo = \DataLoader\DataHandler::connectToDB();
 $query = $pdo->prepare('SELECT funding_name, funding_type FROM funding WHERE funding_id = ?');
@@ -44,6 +49,11 @@ Template::genNavBar(
 <h1>Review Funding Source Data</h1>
 <?php
 if ($_POST['mode'] == 'view') {
+    ?>
+    <script>
+        mode = "view";
+    </script>
+    <?php
     echo '<div class="card" style="width: 80%;">
             <div class="card-body">
                 <h5>Funding Source Name</h5>
@@ -61,19 +71,25 @@ if ($_POST['mode'] == 'view') {
             </div>';
 }
 if ($_POST['mode'] == 'edit') {
+    ?>
+    <script>
+        mode = "edit";
+    </script>
+    <?php
     echo '<div class="card" style="width: 80%;">
             <div class="card-body">
-                <form action="manage-funding.php" method="POST">
+                <form id="edit-form" action="manage-funding.php" method="POST">
                     <h5>Funding Source Name</h5>
                     <input type="text" name="funding_name" id="funding_name" value="' . $data['funding_name'] . '"></br></br>
                     <h5>Funding Source Type</h5>
                     <select name="funding_type" id="funding_type">
-                        <option value="grant"' . isSelected("grant", $data['funding_type']) . '>Grant</option>
-                        <option value="Scholarship"' . isSelected("scholarship", $data['funding_type']) . '>Scholarship</option>
+                        <option value="grant" ' . isSelected("grant", $data['funding_type']) . '>Grant</option>
+                        <option value="Scholarship" ' . isSelected("scholarship", $data['funding_type']) . '>Scholarship</option>
                     </select></br></br>
-                    <input name="mode" id="mode" value="update" hidden> 
-                    <input name="selectFunding" id="selectFunding" value="' . $id . '" hidden>
-                    <button type="submit" formmethod="post" class="btn btn-light">Submit</button>
+                    <input name="mode" id="mode" value="" type="hidden"> 
+                    <input name="selectFunding" id="selectFunding" value="' . $id . '" type="hidden">
+                    <button type="button"  class="btn btn-primary" onclick="editUpdate()">Submit</button>
+                    <button type="button"  class="btn btn-secondary" onclick="editCancel()">Cancel</button>
                 </form>
               </div>
             </div>';
@@ -96,15 +112,9 @@ if ($_POST['mode'] == 'update') {
 }
 ?>
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+<script src="../../_assets/js/jquery-3.5.1.js"></script>
+<script src="../../_assets/js/bootstrap.min.js"></script>
+<script src="controller.js"></script>
 </body>
 
 

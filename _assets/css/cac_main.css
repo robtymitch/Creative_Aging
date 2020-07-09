@@ -13,7 +13,7 @@ body {
 #pending-container div{
     background-color: white;
 }
-#m-a-ch,  #m-a-ad, #m-a-se, #pending-check, input{
+#m-a-ch,  #m-a-ad, #m-a-se, #pending-check input{
     float:right;
 }
 #pending-check label{
