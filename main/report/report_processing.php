@@ -48,7 +48,7 @@ if ($_POST["facilityOpt"] != "allFacilities") {
     if ($_POST['facility'] != "") array_push($conditions, 'facility_name = "' . $_POST['facility'] . '"');
 }
 
-
+array_push($conditions, "pending = 0");
 
 
 if (count($conditions) > 0) {
