@@ -150,9 +150,3 @@ function resetErrors(){
     submitEntryButton.disabled = false;
     selectionErrors = [];
 }
-//function
-
-
-
-
-

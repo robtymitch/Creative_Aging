@@ -7,6 +7,12 @@ $report = $_SESSION["report"];
 $total_attendees = $_SESSION["report-attendee-total"];
 $_SESSION = [];
 session_destroy();
+?>
+    <script>
+        let reportEntries = <?= json_encode($report) ?>;
+        let reportAttendees = <?= json_encode($total_attendees) ?>;
+    </script>
+<?php
 
 ?>
     <body class="container main-bg-c">
@@ -81,11 +87,12 @@ session_destroy();
                 <th class="table-col-r"><?= $report[$i]["funding_name"] ?></th>
                 </tr>
                 <?php
-
             }
             ?>
         </table>
         <br>
+        <button type="button" class="btn btn-primary" onclick="requestPDF()">Download PDF</button>
+
 
         <?php
     } else {
@@ -94,6 +101,9 @@ session_destroy();
         <?php
     }
     ?>
+    <script src="../../_assets/js/jquery-3.5.1.js"></script>
+    <script src="../../_assets/js/bootstrap.min.js"></script>
+    <script src="controller-r.js"></script>
     </body>
 <?php
 Template::showFooter();
