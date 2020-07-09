@@ -52,13 +52,13 @@ Template::genNavBar(
                     <option value="drama">Drama</option>
                     <option value="history-culture">History/Culture</option>
                 </select><br>
-                <label for="newProgramOutreach">Is this an Outreach Program? </label><br>
+                <label for="newProgramOutreach">Is this an Outreach Program? </label>
                 <label for="newOutreachYes">Yes</label>
                 <input type="radio" name="newProgramOutreach" id="newOutreachYes" value="yes">
                 <label for="newOutreachNo">No</label>
                 <input type="radio" name="newProgramOutreach" id="newOutreachNo" value="no" checked="checked"><br>
-                <label for="newProgramDescription"></label>
-                <textarea id="newProgramDescription" name="newProgramDescription"></textarea>
+                <label for="newProgramDescription">Description</label>
+                <textarea id="newProgramDescription" name="newProgramDescription"></textarea><br>
                 <label for="newProgramNotes">Program Notes: </label>
                 <input type="text" name="newProgramNotes" id="newProgramNotes">
             </fieldset>
@@ -116,16 +116,17 @@ Template::genNavBar(
                 </select><br>
             </fieldset>
         </div>
+
         <br>
         <label for="eventDate">Event Date: </label>
         <input type="date" name="eventDate" id="eventDate"><br>
-        <label for="eventTotalAtt">Total Adult Attendees: </label>
-        <input type="number" id="eventTotalAtt" name="eventTotalAdult" min="0"><br>
-        <label for="eventTotalSenior">Total Senior Attendees: </label>
-        <input type="number" id="eventTotalSenior" name="eventTotalSenior" min="0"><br>
-        <label for="eventTotalChild">Total Child Attendees: </label>
-        <input type="number" id="eventTotalChild" name="eventTotalChild" min="0"><br>
-        <label for="eventNotes">Notes: </label><input type="text" name="eventNotes" id="eventNotes"><br>
+<!--        <label for="eventTotalAtt">Total Adult Attendees: </label>-->
+<!--        <input type="number" id="eventTotalAtt" name="eventTotalAdult" min="0"><br>-->
+<!--        <label for="eventTotalSenior">Total Senior Attendees: </label>-->
+<!--        <input type="number" id="eventTotalSenior" name="eventTotalSenior" min="0"><br>-->
+<!--        <label for="eventTotalChild">Total Child Attendees: </label>-->
+<!--        <input type="number" id="eventTotalChild" name="eventTotalChild" min="0"><br>-->
+<!--        <label for="eventNotes">Notes: </label><input type="text" name="eventNotes" id="eventNotes"><br>-->
         <br>
         <div>
             <button type="button" class="btn btn-primary" onclick="confirmEntry()">Submit</button>
@@ -146,6 +147,7 @@ Template::genNavBar(
             </div>
         </div>
     </form>
+
 <?php
 
 Template::addScript('../../_assets/js/jquery-3.5.1.js');

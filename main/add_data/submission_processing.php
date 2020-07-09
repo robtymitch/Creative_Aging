@@ -44,7 +44,7 @@ if ($_POST["fundingSource"] == "add-new") {
 
 $event = new \DataLoader\CACEvent($_POST["eventType"], $program->get_id(), $_POST["eventDate"], $_POST["eventDate"]);
 $event->createEntry($db);
-$eventFacility = new \DataLoader\CACEventFacility($event->get_eventID(), $facility->get_id(), $funding->get_id(), $_POST["eventTotalChild"], $_POST["eventTotalAdult"], $_POST["eventTotalSenior"], $_POST["eventNotes"]);
+$eventFacility = new \DataLoader\CACEventFacility($event->get_eventID(), $facility->get_id(), $funding->get_id(), 0, 0, 0, $_POST["eventNotes"]);
 $eventFacility->createEntry($db);
 header("Location: ../index.php");
 
