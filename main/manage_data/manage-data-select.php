@@ -45,8 +45,8 @@ Template::showHeader("Manage Data", "../../");
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="events" role="tabpanel" aria-labelledby="events-tab">
             <form action="manage-event.php" method="POST">
-                <select name="selectEvent" id="selectEvent" onchange="loadEventDetails(id)" onload="showDiv(this)">
-                    <option value="null">Select an event to view</option>
+                <div id="eventDropdown" class="dropdown-content">
+                    <input type="text" placeholder="Search.." id="eventInput" onkeyup="filterDrop('event')">
                     <?php
                     $event_query = $db->query("SELECT e.program_id, e.event_id, p.program_name, ef.facility_id, f.facility_name, e.date_start
                     FROM programs as p
@@ -56,66 +56,71 @@ Template::showHeader("Manage Data", "../../");
                     ORDER BY date_start, facility_id DESC");
                     while ($event = $event_query->fetch()) {
                         ?>
-                        <option value="<?php echo $event['program_id'] . '-' . $event['facility_id'] . '-' . $event['event_id'] ?>"><?php echo $event['program_name'] . ' - ' . $event['facility_name'] . ' - ' . $event['date_start'] ?></option>
+                        <a class="item" onClick="selectAndCloseDropEvent(this, '<?php echo $event['program_name'] . ' - ' . $event['facility_name'] . ' - ' . $event['date_start'] ?>', '<?php echo $event['program_id'] . '-' . $event['facility_id'] . '-' . $event['event_id'] ?>')"><?php echo $event['program_name'] . ' - ' . $event['facility_name'] . ' - ' . $event['date_start'] ?></a>
                         <?php
                     }
                     ?>
-                </select><br>
+                </div>
+                <input name="selectEvent" id="selectEvent" value="null" hidden>
                 <input name="mode" id="mode" value="view" hidden>
+                <br><br><br>
                 <button type="submit" class="btn btn-primary">View</button>
             </form>
         </div>
         <div class="tab-pane fade" id="programs" role="tabpanel" aria-labelledby="programs-tab">
             <form action="manage-program.php" method="POST">
-                <select name="selectProgram" id="selectProgram" onchange="loadProgramDetails(id)"
-                        onload="showDiv(this)">
-                    <option value="null">Select a program to view</option>
+                <div id="programDropdown" class="dropdown-content">
+                    <input type="text" placeholder="Search.." id="programInput" onkeyup="filterDrop('program')">
                     <?php
                     $programs_query = $db->query("SELECT program_id, program_name FROM programs");
                     while ($program = $programs_query->fetch()) {
                         ?>
-                        <option value="<?= $program['program_id'] ?>"><?= $program['program_name'] ?></option>
+                        <a class="item" onClick="selectAndCloseDropProgram(this, '<?= $program['program_name'] ?>',<?= $program['program_id'] ?>)"><?= $program['program_name'] ?></a>
                         <?php
                     }
                     ?>
-                </select><br>
+                </div>
+                <input name="selectProgram" id="selectProgram" value="null" hidden>
                 <input name="mode" id="mode" value="view" hidden>
+                <br><br><br>
                 <button type="submit" class="btn btn-primary">View</button>
             </form>
         </div>
         <div class="tab-pane fade" id="facilities" role="tabpanel" aria-labelledby="facilities-tab">
             <form action="manage-facility.php" method="POST">
-                <select name="selectFacility" id="selectFacility" onchange="loadFacilityDetails(id)"
-                        onload="showDiv(this)">
-                    <option value="null">Select a facility to view</option>
+                <div id="facilityDropdown" class="dropdown-content">
+                    <input type="text" placeholder="Search.." id="facilityInput" onkeyup="filterDrop('facility')">
                     <?php
                     $facilities_query = $db->query("SELECT facility_id, facility_name FROM facilities");
                     while ($facility = $facilities_query->fetch()) {
                         ?>
-                        <option value="<?= $facility['facility_id'] ?>"><?= $facility['facility_name'] ?></option>
+                        <a class="item" onClick="selectAndCloseDropFacility(this, '<?= $facility['facility_name'] ?>',<?= $facility['facility_id'] ?>)"><?= $facility['facility_name'] ?></a>
                         <?php
                     }
                     ?>
-                </select><br>
+                </div>
+                <input name="selectFacility" id="selectFacility" value="null" hidden>
                 <input name="mode" id="mode" value="view" hidden>
+                <br><br><br>
                 <button type="submit" class="btn btn-primary">View</button>
             </form>
         </div>
         <div class="tab-pane fade" id="funding" role="tabpanel" aria-labelledby="funding-tab">
             <form action="manage-funding.php" method="POST">
-                <select name="selectFunding" id="selectFunding" onchange="loadFundingDetails(id)"
-                        onload="showDiv(this)">
-                    <option value="null">Select a funding source to view</option>
+                <div id="fundingDropdown" class="dropdown-content">
+                    <input type="text" placeholder="Search.." id="fundingInput" onkeyup="filterDrop('funding')">
                     <?php
                     $funding_query = $db->query("SELECT funding_id, funding_name FROM funding");
                     while ($funding = $funding_query->fetch()) {
                         ?>
-                        <option value="<?= $funding['funding_id'] ?>"><?= $funding['funding_name'] ?></option>
+                        <a class="item" onClick="selectAndCloseDropFunding(this, '<?= $funding['funding_name'] ?>',<?= $funding['funding_id'] ?>)"><?= $funding['funding_name'] ?></a>
                         <?php
                     }
                     ?>
-                </select><br>
+                </div>
+                <input name="selectFunding" id="selectFunding" value="null" hidden>
                 <input name="mode" id="mode" value="view" hidden>
+                <br><br><br>
                 <button type="submit" class="btn btn-primary">View</button>
             </form>
         </div>
@@ -130,6 +135,7 @@ Template::showHeader("Manage Data", "../../");
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
+    <script src="controller.js"></script>
     </body>
 <?php
 Template::showFooter();
