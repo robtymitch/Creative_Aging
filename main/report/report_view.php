@@ -3,6 +3,7 @@ require_once("../_classes/DataLoader.php");
 require_once("../../_libs/Template.php");
 session_start();
 Template::showHeader("View Report", "../../");
+
 $report = $_SESSION["report"];
 $total_attendees = $_SESSION["report-attendee-total"];
 $_SESSION = [];
@@ -91,13 +92,16 @@ session_destroy();
             ?>
         </table>
         <br>
-        <button type="button" class="btn btn-primary" onclick="requestPDF()">Download PDF</button>
+
+        <div class="">
+            <span><button type="button" class="btn btn-primary" onclick="requestPDF()">Download PDF</button></span>
+        </div>
 
 
         <?php
     } else {
         ?>
-        <h3>No.</h3>
+        <h3>No results from current criteria</h3>
         <?php
     }
     ?>

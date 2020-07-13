@@ -1,34 +1,45 @@
-const PROGRAM_NAME = 'program_name';
-const PROGRAM_TOPIC = 'program_topic';
-const DATE = 'date_start';
-const FACILITY_NAME = 'facility_name';
-const NUM_CHILDREN = 'num_children';
-const NUM_ADULTS = 'num_adults';
-const NUM_SENIORS = 'num_seniors';
-const ENTRY_TOTAL_ATTENDEES = 'total_attendees';
-const FUNDING_NAME = 'funding_name';
+const TEMP_DOWNLOAD_REL_PATH = "../../temp/";
 
-const REPORT_TOTAL_ATTENDEES = 'temp_total';
-const REPORT_TOTAL_CHILDREN = 'total_children';
-const REPORT_TOTAL_ADULTS = 'total_adults';
-const REPORT_TOTAL_SENIORS = 'total_seniors';
-
-
+let d = new Date();
+let filename = "cac_report_" + (d.getMonth() + 1 )+ "_" + d.getDate() + "_" + d.getFullYear() + ".pdf";
+alert(filename);
 
 function requestPDF(){
     console.log("<+|/ Request sent /|->");
-    let request = new XMLHttpRequest();
     $.ajax({
         type: "POST",
         url: "download/report_download.php",
         data:{
+            filename: filename,
             entries: reportEntries,
             attendees: reportAttendees
         },
         success: function(data){
             console.log("<-| Request processed |+>");
             console.log(data);
+            downloadPDF();
+
         }
     });
+}
+function downloadPDF(){
+    let aTag = document.createElement("a");
+    aTag.href = TEMP_DOWNLOAD_REL_PATH + filename;
+    aTag.download = filename;
+    document.body.appendChild(aTag);
+    aTag.click();
+    setTimeout(function(){
+        document.body.removeChild(aTag);
+        flush();
+    }, 0);
+}
+function flush(){ //triggers report_flush.php to clean out the temp folder
+    $.ajax(
+        {
+            url: "download/report_flush.php",
+            success: function(data){
 
+            }
+        }
+    )
 }
