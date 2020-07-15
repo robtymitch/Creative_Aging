@@ -1,4 +1,7 @@
-
+/*--Async submission tokens--*/
+const TOKEN_PROGRAM = "program";
+const TOKEN_FACILITY = "facility";
+const TOKEN_FUNDING = "funding";
 /*--Error Constants--*/
 //No selection error messages
 const ERROR_NO_EVENT_TYPE_SELECTED = "No event type selected";
@@ -38,6 +41,7 @@ function showDiv(select) {
         document.getElementById(select.name + '_hidden_div').style.display = "none";
     }
 }
+//Submission validation
 function confirmEntry(){
     selectionErrorPresent = false;
     $('#confirm-modal').modal({backdrop: 'static', keyboard: false});
@@ -106,7 +110,6 @@ function selectCheck(){
     }
 
 }
-
 function programCheck(){
     let programName = document.getElementById("newProgramName");
     let programTopic = document.getElementById("newProgramTopic");

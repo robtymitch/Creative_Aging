@@ -24,6 +24,7 @@ Template::genNavBar(
             <option value="kohler">Kohler 1-on-1</option>
             <option value="outreach">Outreach</option>
         </select> <br><br>
+        <!-- Program submission -->
         <label for="program">Program: </label>
         <select name="program" id="program" onchange="showDiv(this)" onload="showDiv(this)">
             <option value="null">- Select an option -</option>
@@ -37,7 +38,9 @@ Template::genNavBar(
             }
             ?>
             <!-- These select options should be dynamically pulled from the DB -->
-        </select><br>
+        </select>
+        <button class="btn btn-primary">+</button>
+        <br>
         <div id="program_hidden_div" class="hidden_div">
             <fieldset>
                 <legend>Add a new program:</legend>
@@ -61,9 +64,11 @@ Template::genNavBar(
                 <textarea id="newProgramDescription" name="newProgramDescription"></textarea><br>
                 <label for="newProgramNotes">Program Notes: </label>
                 <input type="text" name="newProgramNotes" id="newProgramNotes">
+
             </fieldset>
         </div>
         <br>
+        <!-- Facility submission -->
         <label for="facility">Facility: </label>
         <select name="facility" id="facility" onchange="showDiv(this)" onload="showDiv(this)">
             <option value="null">- Select an option -</option>
@@ -86,6 +91,7 @@ Template::genNavBar(
             </fieldset>
         </div>
         <br>
+        <!-- Funding submission -->
         <label for="fundingSource">Funding Source: </label>
         <select name="fundingSource" id="fundingSource" onchange="showDiv(this)" onload="showDiv(this)">
             <option value="null">- Select an option -</option>
@@ -116,17 +122,9 @@ Template::genNavBar(
                 </select><br>
             </fieldset>
         </div>
-
         <br>
         <label for="eventDate">Event Date: </label>
         <input type="date" name="eventDate" id="eventDate"><br>
-<!--        <label for="eventTotalAtt">Total Adult Attendees: </label>-->
-<!--        <input type="number" id="eventTotalAtt" name="eventTotalAdult" min="0"><br>-->
-<!--        <label for="eventTotalSenior">Total Senior Attendees: </label>-->
-<!--        <input type="number" id="eventTotalSenior" name="eventTotalSenior" min="0"><br>-->
-<!--        <label for="eventTotalChild">Total Child Attendees: </label>-->
-<!--        <input type="number" id="eventTotalChild" name="eventTotalChild" min="0"><br>-->
-<!--        <label for="eventNotes">Notes: </label><input type="text" name="eventNotes" id="eventNotes"><br>-->
         <br>
         <div>
             <button type="button" class="btn btn-primary" onclick="confirmEntry()">Submit</button>
