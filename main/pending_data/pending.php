@@ -1,9 +1,7 @@
 <?php
 require_once("../../_libs/Template.php");
 
-
 Template::showHeader("Pending Data", "../../");
-
 ?>
 
     <body>

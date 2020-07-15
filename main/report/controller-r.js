@@ -2,7 +2,6 @@ const TEMP_DOWNLOAD_REL_PATH = "../../temp/";
 
 let d = new Date();
 let filename = "cac_report_" + (d.getMonth() + 1 )+ "_" + d.getDate() + "_" + d.getFullYear() + ".pdf";
-alert(filename);
 
 function requestPDF(){
     console.log("<+|/ Request sent /|->");
