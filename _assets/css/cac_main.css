@@ -1,6 +1,11 @@
+/*add-data.php*/
+.border-outline{
+    border: 1px solid black;
+}
+/*---*/
+
 
 /* Generate Report */
-
 .wrap{
     text-align: center;
 
@@ -49,7 +54,6 @@
     padding-top: 1%;
     padding-bottom: 1%;
 }
-
 /* Generate Report end */
 
 body {

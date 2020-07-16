@@ -14,6 +14,7 @@ class Template
             <title><?= $pageName ?></title>
         </head>
 
+
         <?php
     }
 
@@ -41,7 +42,7 @@ class Template
             }
         }
         ?>
-        <div class="row cstm-border nav-container" id="nav_bar">
+        <div class="row nav-container" id="nav_bar">
             <nav class="">
                 <ul>
                     <?php
